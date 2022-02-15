@@ -30,3 +30,9 @@ Once you completed all the steps above, all you have to do is start the app:
 ```sh
 $ npm run start
 ```
+
+## Registering Slash Commands
+
+To register all slash commands located in `./src/commands`, send `!setup` in a server where you added the bot.
+
+> If a guild id is provided in the `.env`, commands will register for that guild specifically. Remove it to register them application wide.
