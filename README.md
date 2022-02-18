@@ -2,6 +2,12 @@
 Typescript template for a discord bot using **[discord.js](https://discord.js.org)**.
 ## Installation
 
+### Clone the repository
+
+```sh
+git clone https://github.com/Amily404/Discord-Typescript-Template.git
+```
+
 ### Install **required depedencies**
 
 ```sh
