@@ -4,7 +4,7 @@ import bot from "../index.js";
 bot.client.on("messageCreate", async (message) => {
     if (message.channel.type === "DM") return;
     if (message.author.bot) return;
-    if (message.author.id != "YOUR_ID") return console.log("Please insert your id.");
+    if (message.author.id != "YOUR_ID") return console.warn("Please insert your id.");
 
 
 
