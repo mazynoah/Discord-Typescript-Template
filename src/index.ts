@@ -1,6 +1,6 @@
 import { Client, Collection, Intents, ClientOptions } from "discord.js";
 import 'dotenv/config'
-import handler from "./handlers/handler.js";
+import initializeCommands from "./handlers/handler.js";
 import { CommandOptions } from "./utils/command.js";
 
 export enum Color {
@@ -18,29 +18,32 @@ export interface Bot {
     [key: string]: any
 }
 
-function initClient(config: ClientOptions): Bot {
+export type Options = {
+    token: string,
+} & ClientOptions;
+
+async function initClient(config: Options): Promise<Bot> {
 
     const client = new Client(config);
 
+    client.login(config.token);
+
     return {
         client: client,
-        commands: new Collection(),
+        commands: await initializeCommands(),
         devGuild: process.env.GUILD ? process.env.GUILD : ""
     }
 
 }
 
-const bot = initClient({
+const bot = await initClient({
     intents: [
         Intents.FLAGS.GUILDS,
         Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS
-    ]
+        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+        Intents.FLAGS.GUILD_VOICE_STATES
+    ],
+    token: process.env.TOKEN!
 });
-
-//Initalize the bot
-handler(bot);
-
-bot.client.login(process.env.TOKEN);
 
 export default bot;

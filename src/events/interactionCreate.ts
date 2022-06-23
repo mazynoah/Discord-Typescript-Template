@@ -2,6 +2,9 @@ import { CommandInteraction, GuildMember } from 'discord.js';
 import bot from '../index.js';
 
 bot.client.on("interactionCreate", async (interaction) => {
+    if (!interaction.channel) {
+        return;
+    }
 
     if (interaction.isCommand()) {
         await interaction.deferReply()

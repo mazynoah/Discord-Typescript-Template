@@ -1,26 +1,25 @@
 import { promisify } from "util";
-import { Bot } from "../index.js";
 import pkg from 'glob';
+import { Collection } from "discord.js";
+import { CommandOptions } from "../utils/command.js";
 const { glob } = pkg;
 const globPromise = promisify(glob);
 
-export default async (bot:Bot) => {
-    // Events
+export default async () => {
+    // Redirect events to the correct handler
     const eventFiles = await globPromise(`${process.cwd()}/dist/events/*.js`);
     eventFiles.map(async (value) => await import("file://" + value));
 
-    // Slash Commands
+    // Collect all commands
     const slashCommands = await globPromise(
         `${process.cwd()}/dist/commands/*/*.js`
     );
 
-    slashCommands.map(async (value) => {
-
-        const file = await import("file://" + value);
-        const command = file.default;
-        if (!command?.name) return;
-        bot.commands!.set(command.name, command);
-
-        //if (["MESSAGE", "USER"].includes(file.type)) delete file.description;
+    // Load all commands
+    const commands = new Collection();
+    slashCommands.forEach(async (value) => {
+        const command = await import("file://" + value);
+        commands.set(command.default.name, command.default);
     });
+    return commands as Collection<string, CommandOptions> | null;
 };
