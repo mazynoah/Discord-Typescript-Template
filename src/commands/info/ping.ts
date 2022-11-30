@@ -1,4 +1,4 @@
-import { Color } from "../../index.js";
+import { Colors, EmbedBuilder } from "discord.js";
 import { Command } from "../../utils/command.js";
 
 export default new Command({
@@ -6,20 +6,21 @@ export default new Command({
     description: "Returns the ping of the bot",
     execute: async ({ bot, interaction }) => {
         interaction.followUp({
+
             embeds: [
-                {
-                    title: `Ping ${bot.client.ws.ping}ms`,
-                    footer: {
-                        text: `TypeScriptBot v${process.env.npm_package_version} by Amily404`,
-                        icon_url: "https://avatars.githubusercontent.com/u/90854922?v=4"
-                    },
-                    color:
+                new EmbedBuilder()
+                    .setTitle(`Ping ${bot.client.ws.ping}ms`)
+                    .setFooter({
+                        text: `TypeScriptBot v${process.env.npm_package_version} by ddelicious`,
+                        iconURL: "https://avatars.githubusercontent.com/u/90854922?v=4"
+                    })
+                    .setColor(
                         bot.client.ws.ping < 150
-                            ? Color.GREEN
+                            ? Colors.Green
                             : bot.client.ws.ping < 300
-                                ? Color.ORANGE
-                                : Color.RED
-                }
+                                ? Colors.Orange
+                                : Colors.Red
+                    )
             ]
         })
     }

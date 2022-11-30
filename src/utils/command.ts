@@ -1,6 +1,8 @@
 import {
+    CacheType,
     ChatInputApplicationCommandData,
     CommandInteraction,
+    CommandInteractionOptionResolver,
     GuildMember,
     PermissionResolvable
 } from "discord.js";
@@ -8,8 +10,10 @@ import { Bot } from "../index.js";
 
 export interface ExecOptions {
     bot: Bot;
-    interaction: CommandInteraction & { member: GuildMember };
+    interaction: BotCommandInteraction;
 }
+
+export type BotCommandInteraction = CommandInteraction & { member: GuildMember, options: CommandInteractionOptionResolver<CacheType> };
 
 export type ExecFunction = (options: ExecOptions) => any;
 
