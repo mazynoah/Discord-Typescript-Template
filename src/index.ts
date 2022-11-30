@@ -1,4 +1,4 @@
-import { Client, Collection, Intents, ClientOptions } from "discord.js";
+import { Client, Collection, GatewayIntentBits, ClientOptions } from "discord.js";
 import 'dotenv/config'
 import initializeCommands from "./handlers/handler.js";
 import { CommandOptions } from "./utils/command.js";
@@ -30,10 +30,10 @@ async function initClient(config: Options): Promise<Bot> {
 
 const bot = await initClient({
     intents: [
-        Intents.FLAGS.GUILDS,
-        Intents.FLAGS.GUILD_MESSAGES,
-        Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
-        Intents.FLAGS.GUILD_VOICE_STATES
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMessageReactions,
     ],
     token: process.env.TOKEN!
 });
