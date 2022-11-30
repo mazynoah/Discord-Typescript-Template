@@ -1,4 +1,4 @@
-import { Color } from "../../index.js";
+import { Colors } from "discord.js";
 import { Command } from "../../utils/command.js";
 
 export default new Command({
@@ -15,10 +15,10 @@ export default new Command({
                     },
                     color:
                         bot.client.ws.ping < 150
-                            ? Color.GREEN
+                            ? Colors.Green
                             : bot.client.ws.ping < 300
-                                ? Color.ORANGE
-                                : Color.RED
+                                ? Colors.Orange
+                                : Colors.Red
                 }
             ]
         })
