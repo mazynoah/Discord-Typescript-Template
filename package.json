@@ -1,6 +1,6 @@
 {
     "name": "discord-typescript-template",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "description": "Typescript template for a discord bot using discord.js.",
     "main": "./dist/index.js",
     "type": "module",
