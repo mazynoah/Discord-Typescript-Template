@@ -2,10 +2,11 @@ import { promisify } from "util";
 import pkg from 'glob';
 import { Collection } from "discord.js";
 import { CommandOptions } from "../utils/command.js";
+import { MsgCommandOptions } from "../utils/msgCommand.js";
 const { glob } = pkg;
 const globPromise = promisify(glob);
 
-export default async () => {
+export async function initializeCommands() {
     // Redirect events to the correct handler
     const eventFiles = await globPromise(`${process.cwd()}/dist/events/*.js`);
     eventFiles.map(async (value) => await import("file://" + value));
@@ -23,3 +24,17 @@ export default async () => {
     });
     return commands as Collection<string, CommandOptions> | null;
 };
+
+export async function initializeMsgCommands() {
+    const msgCommands = await globPromise(
+        `${process.cwd()}/dist/commands_legacy/*/*.js`
+    );
+
+    const commands = new Collection();
+    msgCommands.forEach(async (value) => {
+        const command = await import("file://" + value);
+        commands.set(command.default.name, command.default);
+    })
+
+    return commands as Collection<string, MsgCommandOptions> | null;
+}

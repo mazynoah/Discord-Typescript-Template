@@ -5,13 +5,13 @@ export default new Command({
     name: "ping",
     description: "Returns the ping of the bot",
     execute: async ({ bot, interaction }) => {
-        interaction.followUp({
+        interaction.reply({
 
             embeds: [
                 new EmbedBuilder()
                     .setTitle(`Ping ${bot.client.ws.ping}ms`)
                     .setFooter({
-                        text: `TypeScriptBot v${process.env.npm_package_version} by ddelicious`,
+                        text: `Tamari v${process.env.npm_package_version} by ddelicious`,
                         iconURL: "https://avatars.githubusercontent.com/u/90854922?v=4"
                     })
                     .setColor(
