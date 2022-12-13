@@ -1,12 +1,11 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, Colors, ComponentType, EmbedBuilder, Message } from "discord.js";
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, ComponentType, EmbedBuilder, Message } from "discord.js";
 import { Color } from "../../index.js";
 import { Command } from "../../utils/command.js";
 import EmbedPage from "../../utils/embedPage.js";
-import { CommandMsg, MsgCommandOptions } from "../../utils/msgCommand.js";
 
 export default new Command({
     name: "help",
-    description: "shows every command",
+    description: "Iterates every commands",
     execute: async ({ bot, interaction }) => {
         await interaction.deferReply();
 
@@ -19,7 +18,7 @@ export default new Command({
         })];
         const embedPage = new EmbedPage();
 
-        // slice the commands into arrays of 10 items each
+        // slice the commands into arrays of 10 items each to make pages
         const pages = commands.reduce((acc, cmd, index) => {
             const page = Math.floor(index / 5);
             if (!acc[page]) acc[page] = [];

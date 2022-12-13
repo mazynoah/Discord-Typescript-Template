@@ -7,7 +7,7 @@ const { glob } = pkg;
 const globPromise = promisify(glob);
 
 export async function initializeCommands() {
-    // Redirect events to the correct handler
+    // Import and set up events
     const eventFiles = await globPromise(`${process.cwd()}/dist/events/*.js`);
     eventFiles.map(async (value) => await import("file://" + value));
 
@@ -26,10 +26,12 @@ export async function initializeCommands() {
 };
 
 export async function initializeMsgCommands() {
+    // Collect all commands
     const msgCommands = await globPromise(
         `${process.cwd()}/dist/commands_legacy/*/*.js`
     );
 
+    // Load all commands
     const commands = new Collection();
     msgCommands.forEach(async (value) => {
         const command = await import("file://" + value);

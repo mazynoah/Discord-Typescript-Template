@@ -4,11 +4,11 @@ import { Command } from '../../utils/command.js';
 
 export default new Command({
     name: "avatar",
-    description: "ill show you the face of anyone",
+    description: "Show your or another person's avatar",
     options: [
         {
             name: "member",
-            description: "the guy with the face you know",
+            description: "The member whose avatar you wish to see",
             type: ApplicationCommandOptionType.User,
             required: false,
         }
@@ -20,9 +20,9 @@ export default new Command({
             embeds: [
                 new EmbedBuilder()
                     .setColor(Color.Primary)
-                    .setTitle(`look at that idiot lol`)
+                    .setTitle(`${Target.displayName}'s avatar`)
                     .setAuthor({ name: Target.displayName, iconURL: Target.displayAvatarURL() })
-                    .setFooter({ text: "eh.. stupid (¬_¬) ", iconURL: Target.displayAvatarURL() })
+                    .setFooter({ text: "eh.. they could look better (¬_¬) ", iconURL: Target.displayAvatarURL() })
                     .setImage(Target.displayAvatarURL({
                         size: 1024
                     }))

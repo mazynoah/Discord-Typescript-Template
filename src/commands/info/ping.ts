@@ -11,7 +11,7 @@ export default new Command({
                 new EmbedBuilder()
                     .setTitle(`Ping ${bot.client.ws.ping}ms`)
                     .setFooter({
-                        text: `Tamari v${process.env.npm_package_version} by ddelicious`,
+                        text: `Typescript-Template v${process.env.npm_package_version} by ddelicious`,
                         iconURL: "https://avatars.githubusercontent.com/u/90854922?v=4"
                     })
                     .setColor(

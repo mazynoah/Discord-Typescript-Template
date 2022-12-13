@@ -3,13 +3,14 @@ import { CommandMsg } from "../../utils/msgCommand.js";
 
 export default new CommandMsg({
     name: "setup",
-    description: "registers the slash commands",
+    description: "Registers the slash commands",
     execute: async ({ bot, message }) => {
         if (message.author.id != process.env.ADMIN_ID) return;
 
         await message.reply({ content: "Sure let me set that up..." });
         console.log("Initializing commands...");
 
+        // deletes devGuild or application commands
         const guild = bot.client.guilds.cache.get(bot.devGuild);
         if (guild) guild.commands.set([]);
         else bot.client.application?.commands.set([]);
