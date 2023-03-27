@@ -5,6 +5,8 @@ const prefix = "!";
 bot.client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
 
+    if (!message.content.startsWith(prefix)) return;
+
     const args = message.content.slice(prefix.length).split(/ +/);
     const cmd = args.shift()?.toLowerCase();
 
