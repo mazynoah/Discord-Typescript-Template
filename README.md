@@ -5,7 +5,7 @@ Typescript template for a discord bot using **[discord.js](https://discord.js.or
 ### Clone the repository
 
 ```sh
-> git clone https://github.com/spookicazt/Discord-Typescript-Template.git
+> git clone https://github.com/formal-pancake/Discord-Typescript-Template.git
 ```
 
 ### Install **required depedencies**
